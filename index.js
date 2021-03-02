@@ -1,32 +1,41 @@
-const jsSlider = document.getElementById("js-slider");
-const jsSliderList = jsSlider.querySelector(".js-slider__list");
-const jsSliderMaxWidth = (jsSliderList.childElementCount * 300 - 800) * -1;
+const jsSlider = document.querySelectorAll(".js-slider");
 
-function checkLimit(value) {
-
+// 스와이프 한계를 검사
+function checkLimit(value, limit) {
   if ( value > 0 ) {
     return 0;
-  } else if ( value < jsSliderMaxWidth ){
-    return jsSliderMaxWidth;
+  } else if ( value < limit ){
+    return limit;
   } else {
     return value;
   }
 }
 
-function setPosition(event) {
+// 스와이프 구동
+function setPosition( event ) {
   let xPosition;
+  let currentList = event.currentTarget.querySelector(".js-slider__list");
+  let jsSliderMaxWidth = ( currentList.childElementCount * 300 - 800 ) * -1;
 
-  if(jsSliderList.style.left) {
-    xPosition = parseInt(jsSliderList.style.left.replace("px", ""));
-    jsSliderList.style.left = checkLimit(xPosition - event.deltaX) + "px";
+  if(currentList.style.left) {
+    xPosition = parseInt(currentList.style.left.replace("px", ""));
+    currentList.style.left = checkLimit(xPosition - event.deltaX, jsSliderMaxWidth) + "px";
   } else {
     xPosition = 0;
-    jsSliderList.style.left = checkLimit(xPosition - event.deltaX)+ "px";
+    currentList.style.left = checkLimit(xPosition - event.deltaX, jsSliderMaxWidth) + "px";
   }
 }
 
 function init() {
-  jsSlider.addEventListener("wheel", setPosition);
+  let list;
+  jsSlider.forEach( function(slider, index) {
+    slider.addEventListener("wheel", setPosition);
+
+
+    //jsSliderMaxWidth.push( (list.childElementCount * 300 - 800 ) * -1);
+  })
 }
 
-init();
+if (jsSlider){
+  init();
+}
