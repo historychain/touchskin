@@ -1,0 +1,39 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: sans-serif;
+}
+
+#js-slider {
+  width: 800px;
+  height: 300px;
+  overflow-x: hidden;
+}
+
+.js-slider__wrapper {
+  width: 2100px;
+  height: 300px;
+  position: relative;
+}
+
+.js-slider__list {
+  display: flex;
+  justify-content: left;
+  position: absolute;
+  left: 0px;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+.js-slider__item {
+}
+
+.item {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
